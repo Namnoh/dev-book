@@ -1,0 +1,23 @@
+---
+import { SCORE_API_ENDPOINT } from "astro:env/server";
+
+const res = await fetch(SCORE_API_ENDPOINT);
+const scoreValue = await res.text();
+---
+
+<div class="flex flex-col justify-center items-center">
+    <span>
+        {Array.from({ length: 5 }).map((_, index) => (
+        <span
+            style={`opacity: ${index < parseInt(scoreValue) ? 1 : 0.55};`}
+            class="inline-block"
+            aria-hidden="true"
+            >
+            ⭐
+            </span>
+        ))}
+    </span>
+    <span class="" id="score">
+        Score: {scoreValue.trim()}/5 
+    </span>
+</div>
